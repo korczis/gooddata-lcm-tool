@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/gooddata/gooddata-ruby.git
-  revision: 81fcf1c547fe34250d4fe5da4d10d0985392cd4d
+  revision: 755bbaa01478bb93d02f58370f9ad4a67dd355bc
   branch: develop
   specs:
     gooddata (0.6.28)
