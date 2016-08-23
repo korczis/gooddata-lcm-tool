@@ -7,7 +7,7 @@ require_relative '../config'
 GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CONFIG[:server], :verify_ssl => false) do |client|
   timestamp = DateTime.now.strftime('%Y%m%d%H%M%S')
 
-  blueprint = GoodData::Model::ProjectBlueprint.build("LCM Master project - #{timestamp}") do |p|
+  blueprint = GoodData::Model::ProjectBlueprint.build("LCM Master Project Basic - #{timestamp}") do |p|
     p.add_date_dimension('committed_on')
     p.add_dataset('devs') do |d|
       d.add_anchor('attr.dev')
@@ -26,28 +26,33 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
   puts "Created project #{project.pid}"
 
   # Load data
-  commits_data = [
-    ['fact.lines_changed', 'committed_on', 'devs'],
-    [1, '01/01/2014', 1],
-    [3, '01/02/2014', 2],
-    [5, '05/02/2014', 3]]
-  project.upload(commits_data, blueprint, 'commits')
+  # commits_data = [
+  #   ['fact.lines_changed', 'committed_on', 'devs'],
+  #   [1, '01/01/2014', 1],
+  #   [3, '01/02/2014', 2],
+  #   [5, '05/02/2014', 3]]
+  # project.upload(commits_data, blueprint, 'commits')
+  #
+  # devs_data = [
+  #   ['label.dev_id', 'label.dev_email'],
+  #   [1, 'tomas@gooddata.com'],
+  #   [2, 'petr@gooddata.com'],
+  #   [3, 'jirka@gooddata.com']]
+  # project.upload(devs_data, blueprint, 'devs')
 
-  devs_data = [
-    ['label.dev_id', 'label.dev_email'],
-    [1, 'tomas@gooddata.com'],
-    [2, 'petr@gooddata.com'],
-    [3, 'jirka@gooddata.com']]
-  project.upload(devs_data, blueprint, 'devs')
-
-  # create a metric
+  # Create a metric
   metric = project.facts('fact.lines_changed').create_metric
   metric.save
+
+  # Create report
   report = project.create_report(title: 'Awesome_report', top: [metric], left: ['label.dev_email'])
   report.save
-  ['tomas.korcak@gooddata.com'].each do |email|
-    project.invite(email, 'admin', "Guys checkout this report #{report.browser_uri}")
-  end
+
+  # TODO: Create dashboard
+
+  # path = '${PUBLIC_APPSTORE}:branch/tma:/apps/users_brick'
+  # process = project.deploy_process(path, name: 'Users Brick')
+  # puts JSON.pretty_generate(process.json)
 
   # Delete project
   # project.delete
