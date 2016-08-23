@@ -1,0 +1,25 @@
+login,firstname,lastname,client_id,role,enabled
+tomas.korcak+andrew.andrews@gooddata.com,Andrew,Andrews,audi,admin,TRUE
+tomas.korcak+bobby.hernandez@gooddata.com,Bobby,Hernandez,audi,editor,TRUE
+tomas.korcak+cameron.boyd@gooddata.com,Cameron,Boyd,bentley,viewer,TRUE
+tomas.korcak+christian.mcdaniel@gooddata.com,Christian,Mcdaniel,bentley,admin,TRUE
+tomas.korcak+clayton.jacobc@gooddata.com,Clayton,Jacobs,bugatti,editor,TRUE
+tomas.korcak+deborah.miller@gooddata.com,Deborah,Miller,bugatti,viewer,TRUE
+tomas.korcak+denise.smith@gooddata.com,Denise,Smith,ducati,admin,TRUE
+tomas.korcak+edith.hart@gooddata.com,Edith,Hart,ducati,editor,TRUE
+tomas.korcak+elsa.wolfe@gooddata.com,Elsa,Wolfe,lamborghini,viewer,TRUE
+tomas.korcak+eugene.king@gooddata.com,Eugene,King,lamborghini,admin,TRUE
+tomas.korcak+helen.frank@gooddata.com,Helen,Frank,man,editor,TRUE
+tomas.korcak+jeffrey.turner@gooddata.com,Jeffrey,Turner,man,viewer,TRUE
+tomas.korcak+jesse.rodriguez@gooddata.com,Jesse,Rodriguez,porsche,admin,TRUE
+tomas.korcak+john.richardson@gooddata.com,John,Richardson,porsche,editor,TRUE
+tomas.korcak+joyce.morre@gooddata.com,Joyce,Moore,scania,viewer,TRUE
+tomas.korcak+karl.rios@gooddata.com,Karl,Rios,scania,admin,TRUE
+tomas.korcak+mamie.guzman@gooddata.com,Mamie,Guzman,seat,editor,TRUE
+tomas.korcak+martha.jackson@gooddata.com,Martha,Jackson,seat,viewer,TRUE
+tomas.korcak+martin.patterson@gooddata.com,Martin ,Patterson,skoda,admin,TRUE
+tomas.korcak+randolph.chandler@gooddata.com,Randolph,Chandler,skoda,editor,TRUE
+tomas.korcak+rickey.crawford@gooddata.com,Rickey,Crawford,volkswagen,viewer,TRUE
+tomas.korcak+russell.alexander@gooddata.com,Russell,Alexander,volkswagen,admin,TRUE
+tomas.korcak+sheri.wilson@gooddata.com,Sheri,Wilson,wolkswagen-commercial,editor,TRUE
+tomas.korcak+sherri.willis@gooddata.com,Sherri,Willis,wolkswagen-commercial,viewer,TRUE

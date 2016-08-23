@@ -1,0 +1,13 @@
+id,name,identifier,founded,hq,enabled,segment
+1,Audi,audi,1910,Germany,TRUE,basic
+2,Bentley Motors Limited,bentley,1919,United Kingdom,TRUE,basic
+3,Bugatti,bugatti,1909,France,TRUE,basic
+4,Ducati,ducati,1926,Italy,TRUE,basic
+5,Lamborghini,lamborghini,1963,Italy,TRUE,basic
+6,MAN SE,man,1758,Germany,TRUE,basic
+7,Porsche,porsche,1931,Germany,TRUE,premium
+8,Scania AB,scania,1891,Sweden,TRUE,premium
+9,Seat,seat,1950,Spain,TRUE,premium
+10,Skoda Auto,skoda,1895,Czech Republic,TRUE,premium
+11,Volkswagen,volkswagen,1937,Germany,TRUE,premium
+12,Volkswagen Commercial Vehicles,wolkswagen-commercial,1995,Germany,TRUE,premium
