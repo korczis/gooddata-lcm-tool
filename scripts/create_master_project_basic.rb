@@ -25,6 +25,11 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
   project = GoodData::Project.create_from_blueprint(blueprint, auth_token: $CONFIG[:token])
   puts "Created project #{project.pid}"
 
+  project.set_metadata('GOODOT_CUSTOM_PROJECT_ID', 'basic')
+  project.set_metadata('GD_LCM_TYPE', 'master')
+  project.set_metadata('GD_LCM_SEGMENT', 'basic')
+  project.set_metadata('GD_LCM_VERSION', '1')
+
   # Load data
   # commits_data = [
   #   ['fact.lines_changed', 'committed_on', 'devs'],
