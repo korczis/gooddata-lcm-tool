@@ -1,4 +1,3 @@
--- auto-generated definition
 CREATE TABLE lcm_projects (
   id         INTEGER NOT NULL,
   name       VARCHAR(255),
