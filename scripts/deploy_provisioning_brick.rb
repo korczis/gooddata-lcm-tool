@@ -6,13 +6,18 @@ require_relative '../config'
 
 DEFAULT_CRON = '0 0 * * *'
 
+NAME = 'Provisioning Brick'
+
 GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CONFIG[:server], :verify_ssl => false) do |client|
   project = client.projects($CONFIG[:projects][:service])
   puts JSON.pretty_generate(project.json)
 
   path = '${PUBLIC_APPSTORE}:branch/tma:/apps/provisioning_brick'
 
-  process = project.deploy_process(path, name: 'Provisioning Brick')
+  process = project.processes.find { |p| p.name == NAME }
+  process.delete if process
+
+  process = project.deploy_process(path, name: NAME)
   puts JSON.pretty_generate(process.json)
 
   options = {
