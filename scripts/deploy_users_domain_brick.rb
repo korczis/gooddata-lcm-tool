@@ -32,16 +32,16 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
       ads_client: {
         username: $CONFIG[:ads][:username],
         password: $CONFIG[:ads][:password],
-        jdbc_url: "jdbc:dss://#{$CONFIG[:hostname]}/gdc/dss/instances/#{$CONFIG[:ads][:id]}"
+        ads_id: $CONFIG[:ads][:id]
       },
       input_source: {
         type: 'ads',
         query: $CONFIG[:ads][:query][:domain_users]
       },
-      GDC_USERNAME: $CONFIG[:username]
-    },
-    sync_mode: 'add_to_organization',
-    whitelists: $CONFIG[:whitelist]
+      GDC_USERNAME: $CONFIG[:username],
+      sync_mode: 'add_to_organization',
+      whitelists: $CONFIG[:whitelist]
+    }
   }
 
   schedule = process.create_schedule(DEFAULT_CRON, 'main.rb', options)

@@ -40,11 +40,11 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
           type: 'ads',
           query: $CONFIG[:ads][:query][:project_users]
         },
-        GDC_USERNAME: $CONFIG[:username]
-      },
-      sync_mode: 'sync_one_project_based_on_custom_id',
-      multiple_projects_column: 'custom_project_id',
-      whitelists: $CONFIG[:whitelist]
+        GDC_USERNAME: $CONFIG[:username],
+        sync_mode: 'sync_one_project_based_on_custom_id',
+        multiple_projects_column: 'custom_project_id',
+        whitelists: $CONFIG[:whitelist]
+      }
     }
 
     schedule = process.create_schedule(DEFAULT_CRON, 'main.rb', options)
