@@ -12,7 +12,7 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
   project = client.projects($CONFIG[:projects][:service])
   puts JSON.pretty_generate(project.json)
 
-  path = '${PUBLIC_APPSTORE}:branch/tma:/apps/release_brick'
+  path = "#{$CONFIG[:appstore]}/release_brick"
 
   process = project.processes.find { |p| p.name == NAME }
   process.delete if process

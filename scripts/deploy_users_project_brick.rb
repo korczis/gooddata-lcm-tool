@@ -14,7 +14,7 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
     project = client.projects(master_pid)
     puts JSON.pretty_generate(project.json)
 
-    path = '${PUBLIC_APPSTORE}:branch/tma:/apps/users_brick'
+    path = "#{$CONFIG[:appstore]}/users_brick"
 
     ################################
     # Deploy Users Brick - Project #
@@ -44,7 +44,7 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
       },
       sync_mode: 'sync_one_project_based_on_custom_id',
       multiple_projects_column: 'custom_project_id',
-      whitelists: %w(@gooddata.com)
+      whitelists: $CONFIG[:whitelist]
     }
 
     schedule = process.create_schedule(DEFAULT_CRON, 'main.rb', options)

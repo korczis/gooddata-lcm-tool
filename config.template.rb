@@ -29,5 +29,9 @@ $CONFIG = {
     username: '<USERNAME>',
     password: '<PASSWORD>',
     server: '<SERVER>'
-  }
+  },
+
+  whitelist: [
+    '@gooddata.com'
+  ]
 }
