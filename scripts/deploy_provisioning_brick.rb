@@ -28,7 +28,7 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
       ads_client: {
         username: $CONFIG[:ads][:username],
         password: $CONFIG[:ads][:password],
-        ads_id: $CONFIG[:ads][:id]
+        jdbc_url: "jdbc:dss://#{$CONFIG[:hostname]}/gdc/dss/instances/#{$CONFIG[:ads][:id]}"
       },
       input_source: {
         type: 'ads',
