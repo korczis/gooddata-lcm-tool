@@ -1,4 +1,6 @@
 $CONFIG = {
+  appstore: '${PUBLIC_APPSTORE}:branch/tma:/apps',
+
   username: '<USERNAME>',
   password: '<PASSWORD>',
   domain: '<DOMAIN>',
