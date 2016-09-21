@@ -30,7 +30,7 @@ $CONFIG = {
       provisioning: 'SELECT identifier as client_id, name as project_title, segment as segment_id FROM lcm_project LIMIT 1;',
       domain_users: 'SELECT distinct LOWER(login) as login, LOWER(login) as email, first_name, last_name FROM lcm_users;',
       project_users: 'SELECT client_id as custom_project_id, LOWER(login) as login, role FROM lcm_user;',
-      release: 'SELECT segment_id, master_project_pid as master_project_id from lcm_release;'
+      release: 'SELECT segment_id, master_project_id as master_project_pid from lcm_release;'
     }
   },
 
