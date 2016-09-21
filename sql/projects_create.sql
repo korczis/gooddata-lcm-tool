@@ -1,4 +1,4 @@
-CREATE TABLE lcm_projects (
+CREATE TABLE lcm_project (
   id         INTEGER NOT NULL,
   name       VARCHAR(255),
   identifier VARCHAR(255),

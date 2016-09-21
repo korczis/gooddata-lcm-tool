@@ -1,4 +1,4 @@
-CREATE TABLE lcm_users (
+CREATE TABLE lcm_user (
     login VARCHAR(255),
     first_name VARCHAR(255),
     last_name VARCHAR(255),

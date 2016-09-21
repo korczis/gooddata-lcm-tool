@@ -1,4 +1,4 @@
-COPY lcm_user FROM LOCAL '/Users/tomaskorcak/dev/gooddata-lcm-training/data/users.csv'
+COPY lcm_release FROM LOCAL '/Users/tomaskorcak/dev/gooddata-lcm-training/data/releases.csv'
   WITH PARSER GDCCSVParser()
   DELIMITER ','
   NULL AS ''
