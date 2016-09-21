@@ -37,21 +37,6 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
   project.set_metadata('GD_LCM_SEGMENT', 'basic')
   project.set_metadata('GD_LCM_VERSION', '1')
 
-  # Load data
-  # commits_data = [
-  #   ['fact.lines_changed', 'committed_on', 'devs'],
-  #   [1, '01/01/2014', 1],
-  #   [3, '01/02/2014', 2],
-  #   [5, '05/02/2014', 3]]
-  # project.upload(commits_data, blueprint, 'commits')
-  #
-  # devs_data = [
-  #   ['label.dev_id', 'label.dev_email'],
-  #   [1, 'tomas@gooddata.com'],
-  #   [2, 'petr@gooddata.com'],
-  #   [3, 'jirka@gooddata.com']]
-  # project.upload(devs_data, blueprint, 'devs')
-
   # Create a metric
   metric = project.facts('fact.lines_changed').create_metric
   metric.save
@@ -73,7 +58,7 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
 
   tab = dashboard.create_tab(:title => 'First Tab')
 
-  item = tab.add_report_item(:report => report, :position_x => 0, :position_y => 20)
+  item = tab.add_report_item(:report => report, :position_x => 0, :position_y => 0)
   dashboard.save
 
   puts JSON.pretty_generate(item.json)

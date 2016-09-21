@@ -37,6 +37,9 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
       technical_user: [
         $CONFIG[:username]
       ],
+      development_project: $CONFIG[:projects][:development],
+      token_postgres: $CONFIG[:tokens][:postgres],
+      token_vertica: $CONFIG[:tokens][:vertica],
       user_for_deployment: {
         login: $CONFIG[:username],
         password: $CONFIG[:password],

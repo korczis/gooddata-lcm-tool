@@ -10,7 +10,6 @@ NAME = 'Users Brick - Project'
 
 GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CONFIG[:server], :verify_ssl => false) do |client|
   $CONFIG[:segments].each do |segment, master_pid|
-
     project = client.projects(master_pid)
     puts JSON.pretty_generate(project.json)
 
