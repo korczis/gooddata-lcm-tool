@@ -35,7 +35,7 @@ $CONFIG = {
     password: '<PASSWORD>',
     id: 'w9c4aec5c9944ac5789e8bcc7b352b23',
     query: {
-      provisioning: 'SELECT identifier as client_id, name as project_title, segment as segment_id FROM lcm_project LIMIT 1;',
+      provisioning: 'SELECT identifier as client_id, name as project_title, segment as segment_id FROM lcm_project;',
       domain_users: 'SELECT distinct LOWER(login) as login, LOWER(login) as email, first_name, last_name FROM lcm_user;',
       project_users: 'SELECT client_id as custom_project_id, LOWER(login) as login, role FROM lcm_user;',
       release: 'SELECT segment_id, master_project_id from lcm_release;'
