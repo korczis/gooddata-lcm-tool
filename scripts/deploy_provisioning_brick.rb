@@ -20,16 +20,33 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
   process = project.deploy_process(path, name: NAME)
   puts JSON.pretty_generate(process.json)
 
+  gd_encoded_hidden_params = {
+    GDC_PASSWORD: $CONFIG[:password],
+    ads_client: {
+      username: $CONFIG[:ads][:username],
+      password: $CONFIG[:ads][:password],
+      jdbc_url: "jdbc:dss://#{$CONFIG[:ads][:hostname]}/gdc/dss/instances/#{$CONFIG[:ads][:id]}"
+    },
+    user_for_deployment: {
+      login: $CONFIG[:username],
+      password: $CONFIG[:password],
+      server: $CONFIG[:server],
+      verify_ssl: false
+    },
+    tokens: {
+      Pg: $CONFIG[:tokens][:postgres],
+      vertica: $CONFIG[:tokens][:vertica]
+    },
+    additional_hidden_params: {
+      GD_ADS_PASSWORD: $CONFIG[:ads][:password]
+    }
+  }
+
   options = {
     params: {
       organization: $CONFIG[:domain],
       CLIENT_GDC_PROTOCOL: 'https',
       CLIENT_GDC_HOSTNAME: $CONFIG[:hostname],
-      ads_client: {
-        username: $CONFIG[:ads][:username],
-        password: $CONFIG[:ads][:password],
-        jdbc_url: "jdbc:dss://secure.gooddata.com/gdc/dss/instances/#{$CONFIG[:ads][:id]}"
-      },
       input_source: {
         type: 'ads',
         query: $CONFIG[:ads][:query][:provisioning]
@@ -37,24 +54,21 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
       technical_user: [
         $CONFIG[:username]
       ],
-      user_for_deployment: {
-        login: $CONFIG[:username],
-        password: $CONFIG[:password],
-        server: $CONFIG[:server],
-        verify_ssl: false
-      },
-      GDC_USERNAME: $CONFIG[:username]
-    },
-    hidden_params: {
-      GDC_PASSWORD: $CONFIG[:password],
-      additional_hidden_params: {
-        GD_ADS_PASSWORD: $CONFIG[:ads][:password]
+      GDC_USERNAME: $CONFIG[:username],
+      query: {
+        release: $CONFIG[:ads][:query][:release]
       }
-    }
+    },
+    hidden_params: {}
   }
 
   #  process.create_schedule(DEFAULT_CRON, 'main.rb', options)
   schedule = process.create_schedule(DEFAULT_CRON, 'main.rb', options)
+  schedule.hidden_params = {
+    'gd_encoded_hidden_params' => JSON.generate(gd_encoded_hidden_params)
+  }
+  schedule.save
+
   puts JSON.pretty_generate(schedule.json)
   schedule.disable!
 end

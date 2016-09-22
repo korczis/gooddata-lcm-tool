@@ -3,34 +3,42 @@ $CONFIG = {
   username: '<USERNAME>',
   password: '<PASSWORD>',
   domain: '<DOMAIN>',
-  hostname: 'staging.intgdc.com',
-  server: 'https://staging.intgdc.com',
+  hostname: '<HOSTNAME>',
+  server: 'https://<SERVER>',
 
   tokens: {
-    postgres: '<POSTGRES_TOKEN>',
-    vertica: '<VERTICA_TOKEN>',
+    postgres: '<TOKEN_POSTGRES>',
+    vertica: '<TOKEN_VERTICA>',
   },
 
   segments: {
-    basic: '<BASIC_MASTER_PID>',
-    premium: '<PREMIUM_MASTER_PID>'
+    basic: {
+      name: 'PostgreSQL Master ##{version}',
+      driver: 'Pg',
+      master_project: 'pid'
+    },
+    premium: {
+      name: 'Vertica Master ##{version}',
+      driver: 'vertica'
+    }
   },
 
   projects: {
-    development: '<DEVELOPMENT_PID>',
-    service: '<SERVICE_PID>'
+    development: 'qlqru2j19kikaddvhbm6jz76kjye24l4',
+    service: 'lt8xrgfpi9k9r56nwhurjt48ftikzezz'
   },
 
   # ADS Settings
   ads: {
-    username: '<SECURE_USERNAME>',
-    password: '<SECURE_PASSWORD>',
-    id: '<INSTANCE_ID>',
+    hostname: '<ADS_HOSTNAME>',
+    username: '<USERNAME>',
+    password: '<PASSWORD>',
+    id: 'w9c4aec5c9944ac5789e8bcc7b352b23',
     query: {
       provisioning: 'SELECT identifier as client_id, name as project_title, segment as segment_id FROM lcm_project LIMIT 1;',
       domain_users: 'SELECT distinct LOWER(login) as login, LOWER(login) as email, first_name, last_name FROM lcm_users;',
       project_users: 'SELECT client_id as custom_project_id, LOWER(login) as login, role FROM lcm_user;',
-      release: 'SELECT segment_id, master_project_id as master_project_pid from lcm_release;'
+      release: 'SELECT segment_id, master_project_id from lcm_release;'
     }
   },
 
@@ -39,7 +47,7 @@ $CONFIG = {
     username: '<USERNAME>',
     password: '<PASSWORD>',
     domain: '<DOMAIN>',
-    server: 'https://staging.intgdc.com'
+    server: 'https://<SERVER>'
   },
 
   # Ignore list for user brick

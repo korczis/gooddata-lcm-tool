@@ -62,4 +62,10 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
   dashboard.save
 
   puts JSON.pretty_generate(item.json)
+
+  # Update config
+  config_path = File.expand_path(File.join(File.dirname(__FILE__), '../config.rb'))
+  config = File.read(config_path)
+  config = config.gsub(/development: '.*'/, "development: '#{project.pid}'")
+  File.open(config_path, 'w') { |file| file.puts config }
 end
