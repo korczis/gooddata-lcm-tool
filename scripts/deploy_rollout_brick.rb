@@ -27,6 +27,9 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
       password: $CONFIG[:ads][:password],
       jdbc_url: "jdbc:dss://#{$CONFIG[:ads][:hostname]}/gdc/dss/instances/#{$CONFIG[:ads][:id]}"
     },
+    technical_user: [
+      $CONFIG[:username]
+    ],
     user_for_deployment: {
       login: $CONFIG[:username],
       password: $CONFIG[:password],
@@ -46,15 +49,6 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
       input_source: {
         type: 'ads',
         query: $CONFIG[:ads][:query][:release]
-      },
-      technical_user: [
-        $CONFIG[:username]
-      ],
-      user_for_deployment: {
-        login: $CONFIG[:username],
-        password: $CONFIG[:password],
-        server: $CONFIG[:server],
-        verify_ssl: false
       },
       GDC_USERNAME: $CONFIG[:username],
       query: {
