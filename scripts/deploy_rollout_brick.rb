@@ -39,13 +39,13 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
     additional_hidden_params: {
       GD_ADS_PASSWORD: $CONFIG[:ads][:password]
     },
-    # update_preference: {
-    #   cascade_drops: false,
-    #   preserve_data: false
-    # },
-    # maql_replacements: {
-    #   'INCLUDE TEMPLATE "([^"]+)" MODIFY \(IDENTIFIER "([^"]+)", TITLE "([^"]+)"\);': 'INCLUDE TEMPLATE "BLAH_BLAH" MODIFY (IDENTIFIER "(\2)", TITLE "(\3);");'
-    # }
+    update_preference: {
+      cascade_drops: false,
+      preserve_data: false
+    },
+    maql_replacements: {
+      'INCLUDE TEMPLATE "([^"]+)" MODIFY \(IDENTIFIER "([^"]+)", TITLE "([^"]+)"\);' => 'INCLUDE TEMPLATE "BLAH_BLAH" MODIFY (IDENTIFIER "(\2)", TITLE "(\3);");'
+    }
   }
 
   options = {
