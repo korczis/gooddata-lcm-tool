@@ -6,7 +6,7 @@ require_relative '../config'
 
 DEFAULT_CRON = '0 0 * * *'
 
-NAME = 'Release Brick'
+NAME = '1 - Release Brick - No Fiscal Date Dimension'
 
 GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CONFIG[:server], :verify_ssl => false) do |client|
   project = client.projects($CONFIG[:projects][:service])
@@ -63,13 +63,8 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
         update: 'UPDATE lcm_release SET master_project_id=\'#{master_project_id}\', version=#{version} WHERE segment_id=\'#{segment_id}\';',
         release: 'SELECT segment_id, master_project_id, version from lcm_release;'
       },
-      update_preference: {
-        cascade_drops: false,
-        preserve_data: false
-      },
-      maql_replacements: {
-        'INCLUDE TEMPLATE "([^"]+)" MODIFY \(IDENTIFIER "([^"]+)", TITLE "([^"]+)"\);' => 'INCLUDE TEMPLATE "BLAH_BLAH" MODIFY (IDENTIFIER "(\2)", TITLE "(\3);");'
-      }
+      update_preference: {},
+      # maql_replacements: $CONFIG[:maql_replacements] || {}
     },
     hidden_params: {}
   }
