@@ -9,7 +9,13 @@ DEFAULT_CRON = '0 0 * * *'
 NAME = 'Users Brick - Project'
 
 GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CONFIG[:server], :verify_ssl => false) do |client|
-  $CONFIG[:segments].each do |segment, master_pid|
+  domain = client.domain($CONFIG[:domain])
+  segments = domain.segments
+
+  segments.each do |s|
+    segment = s.segment_id
+    master_pid = s.master_project_id
+
     project = client.projects(master_pid)
     puts JSON.pretty_generate(project.json)
 
