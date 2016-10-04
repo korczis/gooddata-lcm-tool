@@ -55,8 +55,11 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
       }
     }
 
+    #  process.create_schedule(DEFAULT_CRON, 'main.rb', options)
     schedule = process.create_schedule(DEFAULT_CRON, 'main.rb', options)
-    schedule.hidden_params['gd_encoded_hidden_params'] = JSON.generate(gd_encoded_hidden_params)
+    schedule.hidden_params = {
+      'gd_encoded_hidden_params' => JSON.generate(gd_encoded_hidden_params)
+    }
     schedule.save
 
     puts JSON.pretty_generate(schedule.json)
