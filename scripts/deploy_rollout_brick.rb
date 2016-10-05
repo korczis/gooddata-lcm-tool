@@ -37,14 +37,13 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
       verify_ssl: false
     },
     additional_hidden_params: {
-      GD_ADS_PASSWORD: $CONFIG[:ads][:password]
-    },
-    update_preference: {
-      cascade_drops: false,
-      preserve_data: false
-    },
-    maql_replacements: {
-      'INCLUDE TEMPLATE "([^"]+)" MODIFY \(IDENTIFIER "([^"]+)", TITLE "([^"]+)"\);' => 'INCLUDE TEMPLATE "BLAH_BLAH" MODIFY (IDENTIFIER "(\2)", TITLE "(\3);");'
+      GD_ADS_PASSWORD: $CONFIG[:ads][:password],
+      ads_client: {
+        username: $CONFIG[:ads][:username],
+        password: $CONFIG[:ads][:password],
+        jdbc_url: "jdbc:dss://#{$CONFIG[:ads][:hostname]}/gdc/dss/instances/#{$CONFIG[:ads][:id]}"
+      },
+      gd_encoded_hidden_params: {}
     }
   }
 
@@ -60,7 +59,9 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
       GDC_USERNAME: $CONFIG[:username],
       query: {
         release: $CONFIG[:ads][:query][:release]
-      }
+      },
+      update_preference: {},
+      maql_replacements: $CONFIG[:maql_replacements]
     },
     hidden_params: {}
   }
