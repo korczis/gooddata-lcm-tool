@@ -6,7 +6,7 @@ require_relative '../config'
 
 DEFAULT_CRON = '0 0 * * *'
 
-NAME = '1 - Release Brick - No Fiscal Date Dimension'
+NAME = 'Release Brick'
 
 GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CONFIG[:server], :verify_ssl => false) do |client|
   project = client.projects($CONFIG[:projects][:service])
@@ -44,6 +44,7 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
 
   options = {
     params: {
+      scriptNextVersion: true,
       organization: $CONFIG[:domain],
       CLIENT_GDC_PROTOCOL: 'https',
       CLIENT_GDC_HOSTNAME: $CONFIG[:hostname],
@@ -59,17 +60,18 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
       segments: $CONFIG[:segments] || {},
       query: {
         insert: 'INSERT INTO lcm_release (segment_id, master_project_id, version) VALUES (\'#{segment_id}\', \'#{master_project_id}\', #{version});',
-        select: 'SELECT segment_id, master_project_id, version from lcm_release WHERE segment_id=\'#{segment_id}\';',
+        select: 'SELECT segment_id, master_project_id, version from oha_lcm_release WHERE segment_id=\'#{segment_id}\';',
         update: 'UPDATE lcm_release SET master_project_id=\'#{master_project_id}\', version=#{version} WHERE segment_id=\'#{segment_id}\';',
-        release: 'SELECT segment_id, master_project_id, version from lcm_release;'
+        release: 'SELECT segment_id, master_project_id, version from oha_lcm_release;'
       },
       update_preference: {},
-      # maql_replacements: $CONFIG[:maql_replacements] || {}
+      maql_replacements: $CONFIG[:maql_replacements] || {}
     },
     hidden_params: {}
   }
 
   #  process.create_schedule(DEFAULT_CRON, 'main.rb', options)
+  options[:name] = 'Deploy #1'
   schedule = process.create_schedule(DEFAULT_CRON, 'main.rb', options)
   schedule.hidden_params = {
     'gd_encoded_hidden_params' => JSON.generate(gd_encoded_hidden_params)

@@ -38,12 +38,18 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
       vertica: $CONFIG[:tokens][:vertica]
     },
     additional_hidden_params: {
-      GD_ADS_PASSWORD: $CONFIG[:ads][:password]
+      GD_ADS_PASSWORD: $CONFIG[:ads][:password],
+      ads_client: {
+        username: $CONFIG[:ads][:username],
+        password: $CONFIG[:ads][:password],
+        jdbc_url: "jdbc:dss://#{$CONFIG[:ads][:hostname]}/gdc/dss/instances/#{$CONFIG[:ads][:id]}"
+      },
     }
   }
 
   options = {
     params: {
+      scriptNextVersion: true,
       organization: $CONFIG[:domain],
       CLIENT_GDC_PROTOCOL: 'https',
       CLIENT_GDC_HOSTNAME: $CONFIG[:hostname],
@@ -68,7 +74,7 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
       },
       query: {
         insert: 'INSERT INTO lcm_release (segment_id, master_project_id, version) VALUES (\'#{segment_id}\', \'#{master_project_id}\', #{version});',
-        select: 'SELECT segment_id, master_project_id, version from lcm_release WHERE segment_id=\'#{segment_id}\';',
+        select: 'SELECT segment_id, master_project_id, version from oha_lcm_release WHERE segment_id=\'#{segment_id}\';',
         update: 'UPDATE lcm_release SET master_project_id=\'#{master_project_id}\', version=#{version} WHERE segment_id=\'#{segment_id}\';'
       }
     },
