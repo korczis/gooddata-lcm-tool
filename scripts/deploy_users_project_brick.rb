@@ -41,6 +41,7 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
 
     options = {
       params: {
+        scriptNextVersion: true,
         organization: $CONFIG[:domain],
         CLIENT_GDC_PROTOCOL: 'https',
         CLIENT_GDC_HOSTNAME: $CONFIG[:hostname],

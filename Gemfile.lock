@@ -36,16 +36,26 @@ GEM
     highline (1.7.8)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
+    json (1.8.3)
     json (1.8.3-java)
     json_pure (1.8.3)
     method_source (0.8.2)
     mime-types (2.99.2)
+    mini_portile2 (2.1.0)
     multi_json (1.12.1)
     multipart-post (2.0.0)
     netrc (0.11.0)
+    nokogiri (1.6.8)
+      mini_portile2 (~> 2.1.0)
+      pkg-config (~> 1.1.7)
     nokogiri (1.6.8-java)
     parseconfig (1.0.8)
+    pkg-config (1.1.7)
     pmap (1.1.1)
+    pry (0.10.4)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     pry (0.10.4-java)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -69,13 +79,18 @@ GEM
       ffi
     terminal-table (1.7.1)
       unicode-display_width (~> 1.1.1)
+    thread_safe (0.3.5)
     thread_safe (0.3.5-java)
+    unf (0.1.4)
+      unf_ext
     unf (0.1.4-java)
+    unf_ext (0.0.7.2)
     unicode-display_width (1.1.1)
     xml-simple (1.1.5)
 
 PLATFORMS
   java
+  ruby
 
 DEPENDENCIES
   gooddata
