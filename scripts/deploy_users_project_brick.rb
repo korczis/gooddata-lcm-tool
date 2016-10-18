@@ -9,7 +9,13 @@ DEFAULT_CRON = '0 0 * * *'
 NAME = 'Users Brick - Project'
 
 GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CONFIG[:server], :verify_ssl => false) do |client|
-  $CONFIG[:segments_for_user_brick].each do |segment, master_pid|
+  domain = client.domain($CONFIG[:domain])
+  segments = domain.segments
+
+  segments.each do |s|
+    segment = s.segment_id
+    master_pid = s.master_project_id
+
     project = client.projects(master_pid)
     puts JSON.pretty_generate(project.json)
 
@@ -35,7 +41,6 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
 
     options = {
       params: {
-        scriptNextVersion: true,
         organization: $CONFIG[:domain],
         CLIENT_GDC_PROTOCOL: 'https',
         CLIENT_GDC_HOSTNAME: $CONFIG[:hostname],
@@ -50,10 +55,6 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
       }
     }
 
-#    schedule = process.create_schedule(DEFAULT_CRON, 'main.rb', options)
-#    schedule.hidden_params['gd_encoded_hidden_params'] = JSON.generate(gd_encoded_hidden_params)
-#    schedule.save
-
     #  process.create_schedule(DEFAULT_CRON, 'main.rb', options)
     schedule = process.create_schedule(DEFAULT_CRON, 'main.rb', options)
     schedule.hidden_params = {
@@ -62,8 +63,6 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
     schedule.save
 
     puts JSON.pretty_generate(schedule.json)
-
-
   end
 
 end
