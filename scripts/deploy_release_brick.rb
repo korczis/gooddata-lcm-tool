@@ -6,7 +6,7 @@ require_relative '../config'
 
 DEFAULT_CRON = '0 0 * * *'
 
-NAME = '1 - Release Brick - No Fiscal Date Dimension'
+NAME = '1 - Release Brick'
 
 GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CONFIG[:server], :verify_ssl => false) do |client|
   project = client.projects($CONFIG[:projects][:service])
@@ -39,7 +39,8 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
     },
     additional_hidden_params: {
       GD_ADS_PASSWORD: $CONFIG[:ads][:password]
-    }
+    },
+    development_client: $CONFIG[:development_client] || {}
   }
 
   options = {
