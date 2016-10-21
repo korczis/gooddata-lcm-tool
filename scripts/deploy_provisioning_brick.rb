@@ -57,6 +57,7 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
       ],
       GDC_USERNAME: $CONFIG[:username],
       query: {
+        provisioning: $CONFIG[:ads][:query][:provisioning],
         release: $CONFIG[:ads][:query][:release]
       },
       delete_extra: $CONFIG[:provisioning][:delete_extra],
