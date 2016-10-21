@@ -39,7 +39,7 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
     },
     additional_hidden_params: {
       GD_ADS_PASSWORD: $CONFIG[:ads][:password]
-    }
+    }.merge($CONFIG[:extra_params] || {})
   }
 
   options = {
