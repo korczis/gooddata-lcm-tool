@@ -12,7 +12,7 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
   project = client.projects($CONFIG[:projects][:service])
   puts JSON.pretty_generate(project.json)
 
-  path = "#{$CONFIG[:appstore]}/rollout_brick"
+  path = "#{$CONFIG[:appstore]}/hello_world_brick"
 
   process = project.processes.find { |p| p.name == NAME }
   process.delete if process
@@ -44,7 +44,7 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
         jdbc_url: "jdbc:dss://#{$CONFIG[:ads][:hostname]}/gdc/dss/instances/#{$CONFIG[:ads][:id]}"
       },
       gd_encoded_hidden_params: {}
-    }
+    }.merge($CONFIG[:extra_params] || {})
   }
 
   options = {
@@ -66,6 +66,8 @@ GoodData.with_connection($CONFIG[:username], $CONFIG[:password], :server => $CON
     },
     hidden_params: {}
   }
+
+  puts JSON.pretty_generate(options[:params].merge(gd_encoded_hidden_params))
 
   #  process.create_schedule(DEFAULT_CRON, 'main.rb', options)
   schedule = process.create_schedule(DEFAULT_CRON, 'main.rb', options)
